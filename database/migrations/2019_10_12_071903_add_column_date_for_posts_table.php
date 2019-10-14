@@ -14,7 +14,7 @@ class AddColumnDateForPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('date')->after('content');
+            $table->string('date');
         });
     }
 

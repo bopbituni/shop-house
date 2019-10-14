@@ -14,7 +14,7 @@ class AddSomeColumForProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('bedroom')->after('content');
+            $table->integer('bedroom');
             $table->integer('bathroom')->after('bedroom');
             $table->integer('garage')->after('bathroom');
             $table->string('address')->after('title');
