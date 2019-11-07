@@ -72,14 +72,15 @@
             <div class="container">
                 <div class="nav-header">
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-                    <h1 id="fh5co-logo"><a href="{{ url('/home') }}"><i class="icon-home"></i>Home<span>state</span></a></h1>
+                    <h1 id="fh5co-logo"><a href="{{ route('shop.home') }}"><i class="icon-home"></i>Home<span>state</span></a></h1>
                     <!-- START #fh5co-menu-wrap -->
                     <nav id="fh5co-menu-wrap" role="navigation">
                         <ul class="sf-menu" id="fh5co-primary-menu">
-                            <li><a href="{{ url('/home') }}">Home</a></li>
+                            <li><a href="{{route('shop.home')}}">Home</a></li>
                             <li><a href="{{route('admin.products.list')}}">Product</a></li>
                             <li><a href="{{route('admin.users.list')}}">User</a></li>
                             <li><a href="{{route('admin.posts.list')}}">Post</a></li>
+                            <li><a href="{{route('admin.question.list')}}">Question</a></li>
                             <li class="nav-item dropdown active">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -127,8 +128,11 @@
                                         <div class="form-group">
                                             <label for="inputID"
                                                    class="control-label">Loại biệt thự:</label>
-                                            <input type="text" name="type_house" id="inputID" class="form-control"
-                                                   value="{{$products->type_house}}" required="required">
+                                            <select name="type_id" class="form-control selected">
+                                                @foreach($typeHouses as $typeHouse)
+                                                    <option value="{{$typeHouse->id}}">{{$typeHouse->type_house}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </td>
                                     <td>
@@ -171,6 +175,32 @@
                                                    class="control-label">Loại nhà:</label>
                                             <input type="text" name="title" class="form-control"
                                                    value="{{$products->title}}" required="required">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="inputID"
+                                                   class="control-label">Số phòng tắm:</label>
+                                            <input type="text" name="bathroom" class="form-control"
+                                                   required="required" value="{{$products->bathroom}}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="inputID"
+                                                   class="control-label">Số Garage:</label>
+                                            <input type="text" name="garage" class="form-control"
+                                                   required="required" value="{{$products->garage}}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="inputID"
+                                                   class="control-label">Số phòng ngủ:</label>
+                                            <input type="text" name="bedroom" class="form-control"
+                                                   required="required" value="{{$products->bedroom}}">
                                         </div>
                                     </td>
                                 </tr>

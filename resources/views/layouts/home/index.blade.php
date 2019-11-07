@@ -12,7 +12,7 @@
                                         <div class="desc">
                                             <span class="status">{{$product->status}}</span>
                                             <h1>{{$product->name}}</h1>
-                                            <h2 class="price">{{$product->price}}</h2>
+                                            <h2 class="price">{{number_format($product->price)}} $</h2>
                                             <p>{{$product->introduce}}</p>
                                             <p class="details">
                                                 <span>{{$product->area}}</span>
@@ -33,175 +33,7 @@
         </div>
     </aside>
 
-    <div id="fh5co-search-map">
-        <div class="search-property">
-            <div class="s-holder">
-                <h2>Search House</h2>
-                <div class="row">
-                    <form role="search" method="get" action="{{route('shop.checkSearch')}}">
-                        @csrf
-                        <div class="col-xxs-12 col-xs-12">
-                            <div class="input-field">
-                                <label for="from">Keyword:</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                       id="name"
-                                       placeholder="Nhập tên ..."/>
-                                @error('name')
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-xxs-12 col-xs-12">
-                            <section>
-                                <label for="class">Property Status:</label>
-                                <select class="cs-select cs-skin-border @error('status') is-invalid @enderror"
-                                        name="status" id="status">
-                                    <option disabled selected>Trạng thái</option>
-                                    @foreach($products as $product)
-                                        <option value="{{$product->status}}">{{$product->status}}</option>
-                                    @endforeach
-                                </select>
-                                @error('status')
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                            </section>
-                        </div>
-                        <div class="col-xxs-12 col-xs-12">
-                            <section>
-                                <label for="class">House Type:</label>
-                                <select class="cs-select cs-skin-border input-half @error('type_id') is-invalid @enderror"
-                                        name="type_id" id="type_id">
-                                    <option disabled selected>Kiểu biệt thự</option>
-                                    <option value="1">Biệt thự mùa xuân</option>
-                                    <option value="2">Biệt thự mùa hạ</option>
-                                    <option value="3">Biệt thự mùa thu</option>
-                                    <option value="4">Biệt thự mua đông</option>
-                                </select>
-                                @error('type_id')
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                            </section>
-                        </div>
-                        <div class="col-xxs-12 col-xs-12">
-                            <section>
-                                <label for="class">Price:</label>
-                                <div class="wide">
-                                    <select class="cs-select cs-select-half cs-skin-border input-half @error('fromPrice') is-invalid @enderror"
-                                            id="fromPrice" name="fromPrice">
-                                        <option disabled selected>Từ:</option>
-                                        @for($i = 1500000; $i <= 4000000; $i+=500000)
-                                            <option value="{{$i}}">{{$i}} $</option>
-                                        @endfor
-                                    </select>
-                                    @error('fromPrice')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
-                                    <select class="cs-select cs-select-half cs-skin-border input-half @error('toPrice') is-invalid @enderror"
-                                            id="toPrice" name="toPrice">
-                                        <option disabled selected>Đến:</option>
-                                        @for($i = 1500000; $i <= 4000000; $i+=500000)
-                                            <option value="{{$i}}">{{$i}} $</option>
-                                        @endfor
-                                    </select>
-                                    @error('toPrice')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </section>
-                        </div>
-                        <div class="col-xxs-12 col-xs-12">
-                            <section>
-                                <label for="class">Bedrooms:</label>
-                                <div class="wide">
-                                    <select class="cs-select cs-select-half cs-skin-border input-half @error('fromBedroom') is-invalid @enderror"
-                                            name="fromBedroom" id="fromBedroom">
-                                        <option disabled selected>Từ:</option>
-                                        @for($i = 3; $i <= 8; $i++)
-                                            <option value="{{$i}}">{{$i}} Phòng ngủ</option>
-                                        @endfor
-                                    </select>
-                                    @error('fromBedroom')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
-                                    <select class="cs-select cs-select-half cs-skin-border input-half @error('toBedroom') is-invalid @enderror"
-                                            name="toBedroom" id="toBedroom">
-                                        <option disabled selected>Đến:</option>
-                                        @for($i = 3; $i <= 8; $i++)
-                                            <option value="{{$i}}">{{$i}} Phòng ngủ</option>
-                                        @endfor
-                                    </select>
-                                    @error('toBedroom')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </section>
-                        </div>
-                        <div class="col-xxs-12 col-xs-12">
-                            <section>
-                                <label for="class">Bathrooms:</label>
-                                <div class="wide">
-                                    <select class="cs-select cs-select-half cs-skin-border input-half @error('fromBathroom') is-invalid @enderror"
-                                            name="fromBathroom" id="fromBathroom">
-                                        <option disabled selected>Từ:</option>
-                                        @for($i = 3; $i <= 9; $i++)
-                                            <option value="{{$i}}">{{$i}} Phòng tắm</option>
-                                        @endfor
-                                    </select>
-                                    @error('fromBathroom')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
-                                    <select class="cs-select cs-select-half cs-skin-border input-half @error('toBathroom') is-invalid @enderror"
-                                            name="toBathroom" id="toBathroom">
-                                        <option disabled selected>Đến:</option>
-                                        @for($i = 3; $i <= 9; $i++)
-                                            <option value="{{$i}}">{{$i}} Phòng tắm</option>
-                                        @endfor
-                                    </select>
-                                    @error('toBathroom')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </section>
-                        </div>
-                        <div class="col-xxs-12 col-xs-12">
-                            <section>
-                                <label for="class">Area:</label>
-                                <div class="wide">
-                                    <select class="cs-select cs-select-half cs-skin-border input-half @error('fromArea') is-invalid @enderror"
-                                            name="fromArea" id="fromArea">
-                                        <option disabled selected>Từ:</option>
-                                        @for($i = 200; $i <= 700; $i+=100)
-                                            <option value="{{$i}}">{{$i}} m2</option>
-                                        @endfor
-                                    </select>
-                                    @error('fromArea')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
-                                    <select class="cs-select cs-select-half cs-skin-border input-half @error('toArea') is-invalid @enderror"
-                                            name="toArea" id="toArea">
-                                        <option disabled selected>Đến:</option>
-                                        @for($i = 200; $i <= 700; $i+=100)
-                                            <option value="{{$i}}">{{$i}} m2</option>
-                                        @endfor
-                                    </select>
-                                    @error('toArea')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </section>
-                        </div>
-                        <div class="col-xxs-12 col-xs-12 text-center">
-                            <p>>
-                                <button class="btn btn-primary btn-lg">Search</button>
-                            </p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="map" style="background-image: url({{asset('storage/images/backgroup.jpg')}});">
-        </div>
-    </div>
+   @include('layouts.home.search')
 
     <div id="fh5co-features">
         <div class="container">
@@ -304,11 +136,11 @@
             <div class="row">
                 @foreach($snowHouses as $snowHouse)
                     <div class="col-md-4 animate-box">
-                        <a href="#" class="fh5co-property"
+                        <a href="{{route('shop.detail', $snowHouse->id)}}" class="fh5co-property"
                            style="background-image: url({{asset('storage/'.$snowHouse->image)}});">
                             <span class="status">{{$snowHouse->status}}}</span>
                             <div class="prop-details">
-                                <span class="price">{{$snowHouse->price}}</span>
+                                <span class="price">{{number_format($snowHouse->price)}} $</span>
                                 <h3>Căn biệt thự: {{$snowHouse->name}}</h3>
                             </div>
                         </a>
@@ -384,9 +216,9 @@
                 @foreach($products as $product)
                     <div class="col-md-4 animate-box">
                         <div class="property">
-                            <a href="#" class="fh5co-property"
+                            <a href="{{route('shop.detail', $product->id)}}" class="fh5co-property"
                                style="background-image: url({{asset('storage/'.$product->image)}});">
-                                <span class="status">Sale</span>
+                                <span class="status">{{$product->status}}</span>
                                 <ul class="list-details">
                                     <li>{{$product->area}}
                                     <li>
@@ -397,7 +229,7 @@
                             </a>
                             <div class="property-details">
                                 <h3>{{$product->name}}</h3>
-                                <span class="price">{{$product->price}}</span>
+                                <span class="price">{{number_format($product->price)}} $</span>
                                 <p>{{$product->content}}</p>
                                 <span class="address"><i
                                             class="icon-map"></i>{{$product->address}}</span>
@@ -564,33 +396,56 @@
                 <div class="row">
                     <div class="col-md-12 animate-box">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Name">
+                            <form  method="post" action="{{route('admin.question.store')}}">
+                                @csrf
+                                <input type="hidden" class="form-control" value="{{Auth::user()['id']}}" name="customer_id">
+                                <div class="col-md-12">
+                                    <div class="form-group {{$errors->has('name') ? "has-error" : ""}}">
+                                        <input type="text" class="form-control" placeholder="Name" name="name">
+                                    </div>
+                                    @if($errors->has('name'))
+                                        <span class="help-block">
+                                            {{$errors->first('name')}}
+                                        </span>
+                                        @endif
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email">
+                                <div class="col-md-12">
+                                    <div class="form-group {{$errors->has('email') ? "has-error" : ""}}">
+                                        <input type="text" class="form-control" placeholder="Email" name="email">
+                                    </div>
+                                    @if($errors->has('email'))
+                                        <span class="help-block">
+                                            {{$errors->first('email')}}
+                                        </span>
+                                    @endif
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                        <textarea name="" class="form-control" id="" cols="30" rows="7"
+                                <div class="col-md-12">
+                                    <div class="form-group {{$errors->has('message') ? 'has-error' : ''}}">
+                                        <textarea name="message" class="form-control"  cols="30" rows="7"
                                                   placeholder="Message"></textarea>
+                                    </div>
+                                    @if($errors->has('message'))
+                                        <span class="help-block">
+                                            {{$errors->first('message')}}
+                                        </span>
+                                    @endif
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="submit" value="Send Message" class="btn btn-primary">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="submit" value="Send Message" class="btn btn-primary">
+                                    </div>
+
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="half-bg" style="background-image: url(images/cover_bg_2.jpg);"></div>
+        <div class="half-bg">
+            <img width="700px" height="865px" style="float: right" src="{{asset('storage/images/lienhe1.png')}}">
+
+        </div>
     </div>
 
 @endsection

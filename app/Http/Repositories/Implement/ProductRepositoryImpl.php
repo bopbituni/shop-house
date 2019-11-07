@@ -57,7 +57,6 @@ class ProductRepositoryImpl implements ProductInterface
             ->orWhereBetween("bedroom", [$request['fromBedroom'], $request['toBedroom']])
             ->orWhereBetween("bathroom", [$request['fromBathroom'], $request['toBathroom']])
             ->orWhereBetween("area", [$request['fromArea'], $request['toArea']])->get();
-        dd($getSearch);
         return $getSearch;
     }
 }

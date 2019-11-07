@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Product;
 use App\Type;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.home.header', function ($view){
             $types = Type::all();
             $view -> with('types', $types);
+
         });
     }
 

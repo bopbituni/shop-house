@@ -31,8 +31,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('users/update/{id}', "CustomersController@update")->name('admin.users.update');
             Route::get('users/show/{id}', "CustomersController@show")->name('admin.users.show');
             Route::get('users/delete/{id}', "CustomersController@delete")->name('admin.users.delete');
-            Route::get('/users', 'UserController@index')->name('admin.users');
-            Route::get('/users/{user_id}/approve', 'UserController@approve')->name('admin.users.approve');
+            Route::get('users', 'UserController@index')->name('admin.users');
+            Route::get('users/{user_id}/approve', 'UserController@approve')->name('admin.users.approve');
 
             Route::get('products/list', "ProductsController@index")->name('admin.products.list');
             Route::get('products/create', "ProductsController@create")->name('admin.products.create');
@@ -49,6 +49,12 @@ Route::middleware(['auth'])->group(function () {
             Route::post('posts/update/{id}', "PostsController@update")->name('admin.posts.update');
             Route::get('posts/show/{id}', "PostsController@show")->name('admin.posts.show');
             Route::get('posts/delete/{id}', "PostsController@delete")->name('admin.posts.delete');
+
+            Route::get("question/list","QuestionController@index")->name('admin.question.list');
+            Route::get("question/delete/{id}","QuestionController@delete")->name('admin.question.delete');
+            Route::post('question/store', "QuestionController@store")->name('admin.question.store');
+
+
         });
     });
 });

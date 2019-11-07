@@ -71,14 +71,16 @@
             <div class="container">
                 <div class="nav-header">
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-                    <h1 id="fh5co-logo"><a href="index.html"><i class="icon-home"></i>Home<span>state</span></a></h1>
+                    <h1 id="fh5co-logo"><a href="{{route('shop.home')}}"><i class="icon-home"></i>Home<span>state</span></a>
+                    </h1>
                     <!-- START #fh5co-menu-wrap -->
                     <nav id="fh5co-menu-wrap" role="navigation">
                         <ul class="sf-menu" id="fh5co-primary-menu">
-                            <li><a href="{{ url('/home') }}">Home</a></li>
+                            <li><a href="{{route('shop.home')}}">Home</a></li>
                             <li><a href="{{route('admin.products.list')}}">Product</a></li>
                             <li><a href="{{route('admin.users.list')}}">User</a></li>
                             <li><a href="{{route('admin.posts.list')}}">Post</a></li>
+                            <li><a href="{{route('admin.question.list')}}">Question</a></li>
                             <li class="nav-item dropdown active">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -109,6 +111,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    @if(Session::has('success'))
+                        <p class="text-success">{{Session::get('success')}}</p>
+                    @elseif(Session::has('update'))
+                        <p class="text-success">{{Session::get('update')}}</p>
+                    @elseif(Session::has('delete'))
+                        <p class="text-success">{{Session::get('delete')}}</p>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-hover" style="color: black;">
                             <thead>
@@ -146,7 +155,7 @@
                                         <hr>
                                         Số Garage: {{$product->garage}}</td>
                                     <td>{{$product->title}}</td>
-                                    <td>{{$product->price}}</td>
+                                    <td>{{number_format($product->price)}} $</td>
                                     <td>{{$product->status}}</td>
                                     <td>{{$product->content}}</td>
                                     <td><img style="width: 150px" src="{{asset('storage/'. $product->image)}}"></td>

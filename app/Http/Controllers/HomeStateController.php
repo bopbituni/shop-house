@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\CheckFormSearch;
 use App\Http\Services\Implement\ProductServiceImpl;
 use Illuminate\Http\Request;
 
@@ -24,8 +25,9 @@ class HomeStateController
     }
 
 
-    public function getSearch(Request $request)
+    public function getSearch(CheckFormSearch $request)
     {
+
         $products = $this->productSer->getSearch($request);
 
         return view('shop.search' , compact('products'));

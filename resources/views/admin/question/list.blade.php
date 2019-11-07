@@ -71,7 +71,8 @@
             <div class="container">
                 <div class="nav-header">
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-                    <h1 id="fh5co-logo"><a href="{{route('shop.home')}}"><i class="icon-home"></i>Home<span>state</span></a></h1>
+                    <h1 id="fh5co-logo"><a href="{{route('shop.home')}}"><i class="icon-home"></i>Home<span>state</span></a>
+                    </h1>
                     <!-- START #fh5co-menu-wrap -->
                     <nav id="fh5co-menu-wrap" role="navigation">
                         <ul class="sf-menu" id="fh5co-primary-menu">
@@ -109,102 +110,35 @@
         <!-- end:header-top -->
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-12">
                     .
-                    <table class="table table-striped table-hover">
-                        <tbody>
-                        <form class="form-group" action="{{route('admin.users.update', $customers->id)}}" method="post">
-                            @csrf
-                            <table class="table table-hover">
-                                <tbody>
+                    <div class="table-responsive">
+                        <table class="table table-hover" style="color: black;">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên khách hàng</th>
+                                <th>Email</th>
+                                <th>Tin nhắn</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($questions as $key => $question)
                                 <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="inputID"
-                                                   class="control-label">Ngày xem:</label>
-                                            <input type="date" name="date" id="inputID" class="form-control"
-                                                   value="{{$customers->date}}" required="required"
-                                                   placeholder="Chọn ngày xem đi">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="inputID"
-                                                   class="control-label">Thời gian: {{$customers->time}}</label>
-                                            <select class="form-control" name="time">
-                                                <option value="8h">8h</option>
-                                                <option value="9h">9h</option>
-                                                <option value="10h">10h</option>
-                                                <option value="11h">11h</option>
-                                                <option value="12h">12h</option>
-                                                <option value="13h">13h</option>
-                                                <option value="14h">14h</option>
-                                                <option value="15h">15h</option>
-                                                <option value="16h">16h</option>
-                                                <option value="17h">17h</option>
-                                                <option value="18h">18h</option>
-                                                <option value="19h">19h</option>
-                                                <option value="20h">20h</option>
-                                                <option value="21h">21h</option>
-                                            </select>
-                                        </div>
-                                    </td>
+                                    <td>{{++$key}}</td>
+                                    <td>{{$question->name}}</td>
+                                    <td>{{$question->email}}</td>
+                                    <td>{{$question->message}}</td>
+                                    <td><a href="{{route('admin.question.delete', $question->id)}}"
+                                           onclick="return confirm('Bạn có chắc muốn xóa không?') ">
+                                            <button class="btn btn-danger">Xóa</button>
+                                        </a></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <h4><strong>Thông tin của bạn</strong></h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="inputID"
-                                                   class="control-label">Họ và tên khách :</label>
-                                            <input type="text" name="name" class="form-control"
-                                                   value="{{$customers->name}}" required="required"
-                                                   placeholder="Tên của bạn">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="inputID"
-                                                   class="control-label">Số điện thoại khách :</label>
-                                            <input type="text" name="phone" class="form-control"
-                                                   value="{{$customers->phone}}" required="required"
-                                                   placeholder="Điện thoại(*)">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                            <label for="inputID"
-                                                   class="control-label">Email của khách:</label>
-                                            <input type="text" name="email" class="form-control"
-                                                   value="{{$customers->email}}" required="required"
-                                                   placeholder="Email(*)">
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-hover">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <textarea name="content" rows="5" class="form-control"
-                                                  placeholder="{{$customers->content}}"></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button class="btn btn-success">Chỉnh sửa</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </form>
-                        </tbody>
-                    </table>
-                    -table
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
